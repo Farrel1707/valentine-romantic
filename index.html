@@ -16,9 +16,9 @@ body {
     color: #fff;
     margin: 0;
     padding: 0;
-    position: relative;
 }
 
+/* overlay */
 body::before {
     content: '';
     position: fixed;
@@ -33,7 +33,7 @@ body::before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* ENVELOPE */
@@ -45,7 +45,7 @@ body::before {
     position: relative;
     cursor: pointer;
     border-radius: 10px;
-    transition: transform 0.3s ease;
+    transition: 0.3s;
 }
 
 .envelope:hover {
@@ -71,14 +71,12 @@ body::before {
 /* GALLERY */
 .gallery {
     display: none;
-    position: fixed;
-    inset: 0;
     background: rgba(0,0,0,0.9);
-    z-index: 10;
     padding: 40px 20px;
-    overflow-y: auto;
+    min-height: 100vh;
 }
 
+/* GRID */
 .memory-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -93,8 +91,9 @@ body::before {
 }
 
 .memory-item img {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    max-width: 250px;
+    aspect-ratio: 1/1;
     object-fit: cover;
     border: 15px solid #fff;
     border-bottom: 30px solid #fff;
@@ -107,6 +106,7 @@ body::before {
     font-size: 18px;
 }
 
+/* BUTTON */
 .next-btn {
     display: none;
     margin: 40px auto 0;
@@ -122,15 +122,10 @@ body::before {
 /* FINAL */
 .final-message {
     display: none;
-    position: fixed;
-    inset: 0;
     background: linear-gradient(135deg, #ff9a9e, #fecfef);
-    z-index: 20;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    padding: 60px 20px;
+    min-height: 100vh;
     text-align: center;
-    padding: 20px;
 }
 
 .final-message h1 {
@@ -140,23 +135,18 @@ body::before {
 .final-message p {
     font-size: 20px;
     max-width: 600px;
+    margin: auto;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-
-    .container{
-        height: auto;
-        padding: 40px 20px;
-    }
 
     .memory-grid{
         grid-template-columns: 1fr;
     }
 
     .memory-item img{
-        width: 90%;
-        height: auto;
+        max-width: 90%;
     }
 
     .final-message h1{
@@ -229,6 +219,8 @@ envelope.addEventListener('click', () => {
             loaded = true;
         }
 
+        window.scrollTo(0,0);
+
     }, 1000);
 });
 
@@ -251,7 +243,8 @@ function displayMemories() {
 
 nextBtn.addEventListener('click', () => {
     gallery.style.display = 'none';
-    finalMessage.style.display = 'flex';
+    finalMessage.style.display = 'block';
+    window.scrollTo(0,0);
 });
 </script>
 
